@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            background-color: azure;
+        }
+        a:hover{
+            color: firebrick;
+        }
+        h1 { color: darkslategrey; }
+        a:visited{
+            color: lightseagreen;
+        }
+        a{
+            color:midnightblue;
+        }
+        ol{
+            background-color: antiquewhite;
+        }
+        #aha{
+            color: indigo;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Your budget</title>
+</head>
+<body>
+    <h1>Budget</h1>
+    <header>
+        <h3><a href="/create/bank">Create budget</a></h3>
+        <h3><a href="/create/member">Add member</a></h3>
+        <h3><a href="/create/transaction">Make transaction</a></h3>
+    </header>
+
+    <ol>
+        <h1 id="aha">Information about budget</h1>
+        {% for bank in banks.all %}
+        <li>
+            <h3><b>Bank:</b> {{bank.name}}</h3>
+            <br>
+            Amount of money: {{bank.money_count}}
+            <br>
+            <a href="{% url 'delete_bank' bank.id %}">Delete this bank</a>
+            <br>
+            <h4>Family members:<br></h4>
+            <ol>
+            {% for member in bank.members.all %}
+                    <li>
+                        Name: <a href="{% url 'member_detail' member.id %}">
+                            {{member.full_name}}
+                        </a>
+                        <br>
+                        <a href="{% url 'delete_member' member.id %}">Delete this member</a>
+                        <br>
+                        Amount of money: {{member.money_count}}<br>
+                        <b>Transactions:</b><br>
+                        <ol>
+                            {% for transaction in member.transactions.all %}
+                            <li>
+                                Value: {{transaction.value}}<br>
+                                Date: {{transaction.date}}<br>
+                                <a href="{% url 'delete_transaction' transaction.id %}">Delete this transaction</a>
+                            </li>
+                            {% endfor %}
+                        </ol>
+                        <br>
+                    </li>
+            {% endfor %}
+            </ol>
+        </li>
+        {% endfor %}
+    </ol>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+swagger: "2.0"
+info:
+  description: "Family budget"
+  version: "0.0.1"
+  title: "Budget"
+  contact:
+    email: "kruchkovska2702@gmail.com"
+host: "a.b.c"
+basePath: "/v2"
+tags:
+- name: "Budget name"
+  description: "Transactions"
+schemes:
+- "https"
+- "http"
+paths:
+  /events:
+    post:
+      tags:
+      - "Budget"
+      summary: "Add family member"
+      description: ""
+      operationId: "addMember"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Budget that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Budget"
+      responses:
+        405:
+          description: "Invalid input"
+    get:
+      tags:
+      - "Budget"
+      summary: "Get all budgets"
+      description: ""
+      operationId: "getBudgets"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+    delete:
+      tags:
+      - "Budgets"
+      summary: "Delete all budgetss"
+      description: ""
+      operationId: "deleteBudgets"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+
+  /users:
+    post:
+      tags:
+      - "Family"
+      summary: "Find a family member"
+      description: ""
+      operationId: "Family"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Family object that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Event"
+      responses:
+        405:
+          description: "Invalid input"
+    get:
+      tags:
+      - "users"
+      summary: "Get all family members"
+      description: ""
+      operationId: "getFamily"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+    delete:
+      tags:
+      - "users"
+      summary: "Delete family member"
+      description: ""
+      operationId: "deleteFamily"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+
+
+definitions:
+  Event:
+    type: "Budget"
+    required:
+    - "name"
+    - "money"
+    properties:
+      name:
+        type: "string"
+      money:
+        type: "integer"
+        format: "int64"
+  Users:
+    type: "object"
+    required:
+    - "money"
+    - "name"
+    - "budget"
+    properties:
+      money:
+        type: "integer"
+        format: "int64"
+      budget:
+        $ref: "#/definitions/Users"
+      family:
+        type: "string"
+        example: "B123"

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adding new transaction</title>
+
+    <style>
+        body{
+            background-color: azure;
+        }
+        h1 { color: darkslategrey; }
+        a:visited{
+            color: lightseagreen;
+        }
+        a{
+            color:midnightblue;
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit">Post</button>
+    </form>
+</body>
+</html>

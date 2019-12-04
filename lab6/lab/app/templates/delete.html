@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>In process...</title>
+</head>
+<body>
+
+<h3>Delete object?</h3>
+<form method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button type="submit" href= "{% url 'main_page' %}">Yes</button>
+</form>
+
+</body>
+</html>
